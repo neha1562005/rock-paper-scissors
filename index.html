@@ -8,13 +8,16 @@
 </head>
 
 <body>
+
+    <div class="human-selection">
+        <button id="rock">rock</button>
+        <button id="paper">paper</button>
+        <button id="scissors">scissors</button>
+    </div>
+    <div class="results"></div>
+    <div class="score"></div>
+
     <script>
-
-
-
-
-        
-
      function getComputerChoice () {
             num = Math.floor ( Math.random()* 3 ) ; // random num between 0 and 3
 
@@ -27,82 +30,69 @@
             }
         }
  
-        function getHumanChoice() {
-            let choice = (prompt("Rock, paper or scissors?")).toLowerCase();
-       
-            if (choice != "rock" && choice != "paper" && choice != "scissors") {
-                choice = prompt("Invalid choice. Retry!").toLowerCase();
-            }
-            return choice;
-
-        }
 
         function playRound () {
-            
-            let humanChoice = getHumanChoice();
             console.log(humanChoice);
             let computerChoice = getComputerChoice();
             console.log(computerChoice);
 
             if (humanChoice == computerChoice) {
-                console.log("It's a tie!!");
+                results.textContent = "It's a tie!!";
             } else if (humanChoice == "rock") {
                 if(computerChoice == "paper") {
-                    console.log("You lose! Paper beats Rock.");
+                    results.textContent = "You lose! Paper beats Rock.";
                     return computerScore++;
                 } else {
-                    console.log("You win! Rock beats Scissors.");
+                    results.textContent = "You win! Rock beats Scissors.";
                     return humanScore++;
                 }
             } else if (humanChoice == "paper") {    
                     if(computerChoice == "rock") {
-                        console.log("You win! Paper beats Rock.");
+                        results.textContent = "You win! Paper beats Rock.";
                         return humanScore++;
                     } else {
-                        console.log("You lose! Scissors beat Paper.");
+                        results.textContent = "You lose! Scissors beat Paper.";
                         return computerScore++;
                     }
 
             }  else {
                 if(computerChoice == "rock") {
-                    console.log("You lose! Rock beats Scissors.");
+                    results.textContent = "You lose! Rock beats Scissors.";
                     return computerScore++;
                 } else {
-                    console.log("You win! Scissors beat Paper.");
+                    results.textContent = "You win! Scissors beat Paper.";
                     return humanScore++;
                 }
             }
         }
 
-        function playGame () {
-
-
-            for (let i = 0; i < 5; i++) {
-                playRound();
-            }
-
-            console.log(humanScore);
-            console.log(computerScore);
-
-            if (humanScore > computerScore) {
-                return "YOU WIN THE GAME!!!";
-            } else if (humanScore < computerScore) {
-                return "You lose the game :(";
-            } else {
-                return "The game's a tie!";
-            }
-        
-        }
-
         let humanScore = 0;
         let computerScore = 0;
+        let humanChoice = '';
+        const humanSelection = document.querySelector("div.human-selection");
+        const results = document.querySelector("div.results");
+        const score = document.querySelector("div.score");
         
-        console.log(playGame());
-   
+        
+        humanSelection.addEventListener("click", (event) => {
+            let target = event.target;
+            
+            switch(target.id) {
+                case 'rock':
+                    humanChoice = 'rock';
+                    break;
+                case 'paper':
+                    humanChoice = 'paper';
+                    break;
+                case 'scissors':
+                    humanChoice = 'scissors';
+                    break;    
+            }
+            playRound();
+            
+        });
 
-
-
-
+        
     </script>
 </body>
 
