@@ -75,7 +75,7 @@
         const score = document.querySelector("div.score");
         const finalScore = document.querySelector(".finalScore");
 
-        while(humanScore <= 5 && computerScore <= 5) {  
+
         humanSelection.addEventListener("click", (event) => {
             let target = event.target;
             
@@ -93,17 +93,28 @@
             playRound();
             score.textContent = `
             Your score: ${humanScore}  ComputerScore: ${computerScore}`;
+            replayGame();
         });
-    }
 
-    if(humanScore == computerScore) {
-        finalScore.textContent =   `It's a tie!`;
-    } else if (humanScore > computerScore) {
-        finalScore.textContent = `YOU WIN!`;
+        function replayGame() {
+if(humanScore == 5 || computerScore == 5 ) {
+    if (humanScore > computerScore) {
+        finalScore.textContent = `YOU WIN THE GAME!`;
+    } else if (humanScore < computerScore) {
+        finalScore.textContent = `Computer wins the game`;
     } else {
-        finalScore.textContent = `Computer wins :(`;
-    }
-        
+        finalScore.textContent = `It's a tie`;
+    } 
+    humanScore = 0;
+    computerScore = 0;
+    humanSelection.removeEventListener('click', event);
+    const replay = document.createElement("button");
+    replay.textContent = "Replay";
+    document.body.appendChild(replay);
+    replay.addEventListener("click", () => location.reload());
+
+}
+        }
     </script>
 </body>
 
