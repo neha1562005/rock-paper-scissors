@@ -91,8 +91,7 @@
                     break;    
             }
             playRound();
-            score.textContent = `
-            Your score: ${humanScore}  ComputerScore: ${computerScore}`;
+            score.textContent = `Your score: ${humanScore} ComputerScore: ${computerScore}`;
             replayGame();
         });
 
@@ -105,8 +104,6 @@ if(humanScore == 5 || computerScore == 5 ) {
     } else {
         finalScore.textContent = `It's a tie`;
     } 
-    humanScore = 0;
-    computerScore = 0;
     humanSelection.removeEventListener('click', event);
     const replay = document.createElement("button");
     replay.textContent = "Replay";
