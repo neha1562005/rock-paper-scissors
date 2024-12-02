@@ -16,6 +16,7 @@
     </div>
     <div class="results"></div>
     <div class="score"></div>
+    <div class="finalScore"></div>
 
     <script>
      function getComputerChoice () {
@@ -32,9 +33,8 @@
  
 
         function playRound () {
-            console.log(humanChoice);
+
             let computerChoice = getComputerChoice();
-            console.log(computerChoice);
 
             if (humanChoice == computerChoice) {
                 results.textContent = "It's a tie!!";
@@ -66,14 +66,16 @@
             }
         }
 
+               
         let humanScore = 0;
         let computerScore = 0;
         let humanChoice = '';
         const humanSelection = document.querySelector("div.human-selection");
         const results = document.querySelector("div.results");
         const score = document.querySelector("div.score");
-        
-        
+        const finalScore = document.querySelector(".finalScore");
+
+        while(humanScore <= 5 && computerScore <= 5) {  
         humanSelection.addEventListener("click", (event) => {
             let target = event.target;
             
@@ -92,7 +94,15 @@
             score.textContent = `
             Your score: ${humanScore}  ComputerScore: ${computerScore}`;
         });
+    }
 
+    if(humanScore == computerScore) {
+        finalScore.textContent =   `It's a tie!`;
+    } else if (humanScore > computerScore) {
+        finalScore.textContent = `YOU WIN!`;
+    } else {
+        finalScore.textContent = `Computer wins :(`;
+    }
         
     </script>
 </body>
